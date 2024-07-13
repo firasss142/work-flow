@@ -1,0 +1,29 @@
+UserController
+Description
+The UserController is a controller that handles HTTP requests related to user management.
+
+Constructor
+constructor(userUseCases: UserUseCases): Initializes the UserController with an instance of the UserUseCases.
+Endpoints
+GET /api/user/:id: Retrieves a user by ID. (Requires Admin role)
+GET /api/user/email/:email: Retrieves a user by email. (Requires Admin role)
+GET /api/user: Retrieves all users. (Requires Admin role)
+POST /api/user: Creates a new user account. (Requires Admin role)
+POST /api/user (Multipart Form): Creates a new user account with avatar. (Requires Admin role)
+PUT /api/user/:id (Multipart Form): Updates a user account with avatar. (Requires Admin role)
+PUT /api/user/:userId/password: Updates a user's password. (Requires Admin role)
+DELETE /api/user/:id: Deletes a user. (Requires Admin role)
+GET /api/user/users/count: Retrieves the total number of users. (Requires Admin role)
+PUT /api/user/revoke/:uid: Revokes a user's attestation. (Requires Admin role)
+Guards
+JwtAuthGuard: Protects routes with JWT authentication.
+RolesGuard: Protects routes based on user roles.
+Interceptors
+FileInterceptor: Intercepts file uploads.
+Swagger Decorators
+@ApiTags("api/user"): Tags the controller with "api/user" for Swagger documentation.
+@ApiBearerAuth(): Indicates that routes require a bearer token for authentication.
+@ApiConsumes("multipart/form-data"): Specifies that the route consumes multipart form data.
+@ApiParam({ name: "id", type: String, description: "ID of the user" }): Adds a parameter description for Swagger documentation.
+Usage
+This controller can be used to manage users, including creating, updating, and deleting user accounts.

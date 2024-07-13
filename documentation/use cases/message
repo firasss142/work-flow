@@ -1,0 +1,98 @@
+MessagesUseCases
+Description
+The MessagesUseCases class provides methods for handling message-related operations, such as creating messages, updating messages, deleting messages, and retrieving messages. It also handles the logic for creating conversations if they do not exist between two users and updating conversation details when a new message is created. Additionally, it provides methods for marking messages as read and retrieving messages by sender or receiver ID.
+
+Constructor
+dataServices: IDataServices - Service for interacting with the data layer.
+messageFactoryService: MessageFactoryService - Service for creating and updating message entities.
+conversationFactoryService: ConversationFactoryService - Service for creating conversation entities.
+notificationsGateway: NotificationsGateway - Gateway for sending notifications.
+Methods
+createMessage(createMessageDto: CreateMessagesDto): Promise<Message>
+Description: Creates a new message and updates the conversation details if necessary.
+Parameters:
+createMessageDto: CreateMessagesDto - The DTO containing the data for the new message.
+Returns: Promise<Message> - The newly created message.
+getAllMessages(): Promise<MessageResponseDTO[]>
+Description: Retrieves all messages with details of sender and receiver.
+Returns: Promise<MessageResponseDTO[]> - An array of message objects with sender and receiver details.
+getMessageById(messageId: string): Promise<MessageResponseDTO>
+Description: Retrieves a message by its ID with details of sender and receiver.
+Parameters:
+messageId: string - The ID of the message to retrieve.
+Returns: Promise<MessageResponseDTO> - The message object with sender and receiver details.
+updateMessage(messageId: string, updateMessageDto: UpdateMessagesDTO): Promise<Message>
+Description: Updates a message with new data.
+Parameters:
+messageId: string - The ID of the message to update.
+updateMessageDto: UpdateMessagesDTO - The DTO containing the updated data for the message.
+Returns: Promise<Message> - The updated message.
+deleteMessage(messageId: string): Promise<Message>
+Description: Deletes a message.
+Parameters:
+messageId: string - The ID of the message to delete.
+Returns: Promise<Message> - The deleted message.
+getMessagesByReceiverId(receiverId: string): Promise<MessageResponseDTO[]>
+Description: Retrieves all messages received by a user with details of sender and receiver.
+Parameters:
+receiverId: string - The ID of the user receiving the messages.
+Returns: Promise<MessageResponseDTO[]> - An array of message objects with sender and receiver details.
+getMessagesBySenderId(senderId: string): Promise<MessageResponseDTO[]>
+Description: Retrieves all messages sent by a user with details of sender and receiver.
+Parameters:
+senderId: string - The ID of the user sending the messages.
+Returns: Promise<MessageResponseDTO[]> - An array of message objects with sender and receiver details.
+markMessageAsRead(messageId: string): Promise<Message>
+Description: Marks a message as read.
+Parameters:
+messageId: string - The ID of the message to mark as read.
+Returns: Promise<Message> - The updated message.
+getMessagesByConversationId(conversationId: string, page: number, limit: number): Promise<MessageResponseDTO[]>
+Description: Retrieves messages by conversation ID with pagination support.
+Parameters:
+conversationId: string - The ID of the conversation to retrieve messages for.
+page: number - The page number for pagination.
+limit: number - The maximum number of messages per page.
+Returns: Promise<MessageResponseDTO[]> - An array of paginated message objects with sender and receiver details.
+
+************************************************************************************************
+
+MessageFactoryService
+Description
+The MessageFactoryService class provides methods for creating and updating message entities.
+
+Constructor
+None
+
+Methods
+createNewMessage(createMessageDto: CreateMessagesDto): Message
+Description: Creates a new message entity based on the provided DTO.
+Parameters:
+createMessageDto: CreateMessagesDto - The DTO containing the data for the new message.
+Returns: Message - The newly created message entity.
+updateMessage(updateMessageDto: UpdateMessagesDTO): Message
+Description: Updates a message entity with new data.
+Parameters:
+updateMessageDto: UpdateMessagesDTO - The DTO containing the updated data for the message.
+Returns: Message - The updated message entity.
+
+**********************************************************************************************
+
+MessageUseCasesModule
+Description
+The MessageUseCasesModule is a module that provides the necessary dependencies for working with messages, including use cases and services.
+
+Imports
+DataServicesModule: Module for data services used by the messages module.
+SocketModule: Module for socket services used for notifications.
+Providers
+MessagesUseCases: Use cases for managing messages.
+MessageFactoryService: Service for creating message entities.
+ConversationFactoryService: Service for creating conversation entities.
+NotificationsGateway: Gateway for sending notifications over sockets.
+Exports
+MessagesUseCases: Use cases for managing messages.
+MessageFactoryService: Service for creating message entities.
+ConversationFactoryService: Service for creating conversation entities.
+NotificationsGateway: Gateway for sending notifications over sockets.
+

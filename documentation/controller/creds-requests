@@ -1,0 +1,25 @@
+CredsRequestsController
+Description
+The CredsRequestsController is a controller that handles requests related to credential requests.
+
+Constructor
+constructor(credsRequestsUseCases: CredsRequestsUseCases): Initializes the CredsRequestsController with an instance of the CredsRequestsUseCases.
+Endpoints
+GET /api/creds-requests: Retrieves all requests based on the user's role. (Requires authentication)
+GET /api/creds-requests/:id: Retrieves a request by its ID. (Requires authentication and admin role)
+GET /api/creds-requests/request/user/:userId: Retrieves requests by user ID. (Requires authentication and admin role)
+POST /api/creds-requests: Creates a new request. (Requires authentication)
+PUT /api/creds-requests/:requestId: Updates a request. (Requires authentication and admin role)
+DELETE /api/creds-requests/:id: Deletes a request. (Requires authentication and admin role)
+GET /api/creds-requests/requests/stats: Retrieves statistics for all requests. (Requires authentication and admin role)
+GET /api/creds-requests/ownrequests/stats: Retrieves statistics for own requests. (Requires authentication)
+Guards
+JwtAuthGuard: Protects routes with JWT authentication.
+RolesGuard: Protects routes based on user roles.
+Swagger Decorators
+@ApiTags("api/creds-requests"): Tags the controller with "api/creds-requests" for Swagger documentation.
+@ApiBearerAuth(): Indicates that routes require a bearer token for authentication.
+@ApiParam({ name: "param", type: String, description: "Description" }): Adds a parameter description for Swagger documentation.
+@ApiBody({ type: SomeDto }): Specifies the request body for a particular endpoint.
+Usage
+This controller provides endpoints for managing credential requests, including creating, updating, and deleting requests, as well as retrieving statistics.

@@ -1,0 +1,37 @@
+BcryptService
+Description
+The BcryptService is a service that provides methods for hashing and comparing passwords using the bcrypt algorithm.
+
+Methods
+hashPassword(password: string): Promise<string>: Hashes a password using bcrypt.
+
+password (string): The password to hash.
+Returns: A Promise that resolves to the hashed password.
+comparePassword(plainPassword: string, hashedPassword: string): Promise<boolean>: Compares a plain password with a hashed password to check if they match.
+
+plainPassword (string): The plain password to compare.
+hashedPassword (string): The hashed password to compare against.
+Returns: A Promise that resolves to a boolean indicating whether the passwords match.
+Usage
+This service can be injected into other classes or services in your NestJS application to hash passwords and verify password hashes.
+
+******************************************************************************************************
+
+
+Sure! Here's a simple documentation for the provided TypeScript code:
+
+IBcryptService Interface
+This interface defines the contract for a service that provides password hashing and comparison functionality using bcrypt.
+
+Methods
+hashPassword(password: string): Promise<string>
+Description: Hashes a plain text password.
+Parameters:
+password (string): The plain text password to be hashed.
+Returns: A Promise that resolves to a hashed password string.
+comparePassword(plainPassword: string, hashedPassword: string): Promise<boolean>
+Description: Compares a plain text password with a hashed password to check if they match.
+Parameters:
+plainPassword (string): The plain text password to be compared.
+hashedPassword (string): The hashed password to be compared.
+Returns: A Promise that resolves to a boolean indicating whether the passwords match (true) or not (false).

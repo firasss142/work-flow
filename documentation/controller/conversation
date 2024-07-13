@@ -1,0 +1,19 @@
+ConversationController
+Description
+The ConversationController is a controller that handles requests related to conversations.
+
+Constructor
+constructor(conversationUseCases: ConversationUseCases): Initializes the ConversationController with an instance of the ConversationUseCases.
+Endpoints
+GET /api/conversations/allConversations?page=<page>&limit=<limit>: Retrieves all conversations. (Requires authentication and admin role)
+GET /api/conversations/userConversations?page=<page>&limit=<limit>: Retrieves conversations for the current user. (Requires authentication)
+GET /api/conversations/:id: Retrieves a conversation by its ID. (Requires authentication)
+Guards
+JwtAuthGuard: Protects routes with JWT authentication.
+RolesGuard: Protects routes based on user roles.
+Swagger Decorators
+@ApiTags("api/conversations"): Tags the controller with "api/conversations" for Swagger documentation.
+@ApiBearerAuth(): Indicates that routes require a bearer token for authentication.
+@ApiParam({ name: "param", type: String, description: "Description" }): Adds a parameter description for Swagger documentation.
+Usage
+This controller provides endpoints for managing conversations, including retrieving all conversations, retrieving user-specific conversations, and retrieving a conversation by ID.

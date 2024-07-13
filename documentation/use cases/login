@@ -1,0 +1,81 @@
+LoginUseCase
+Description
+The LoginUseCase is a service responsible for handling user authentication, including login, two-factor authentication, password reset, and user details loading.
+
+Dependencies
+IDataServices: Service for interacting with data-related services.
+IBcryptService: Service for handling bcrypt operations.
+JwtService: Service for handling JWT token generation and verification.
+MailerService: Service for sending emails.
+LoginFactoryService: Service for creating login response DTOs.
+Methods
+validateUser(email: string, password: string): Promise<User | null>
+Description: Validates a user's credentials (email and password).
+Parameters:
+email: string - The user's email.
+password: string - The user's password.
+Returns: A User object if the credentials are valid, otherwise null.
+login(credentials: LoginRequestDto): Promise<string>
+Description: Initiates the login process, including generating and sending a two-factor authentication (2FA) code to the user's email.
+Parameters:
+credentials: LoginRequestDto - The login request DTO containing email and password.
+Returns: A message indicating that the 2FA code has been sent to the user's email.
+verifyTwoFactorCode(twoFactorInput: TwoFactorDto): Promise<LoginResponseDto>
+Description: Verifies the 2FA code entered by the user and returns a JWT token if the code is valid.
+Parameters:
+twoFactorInput: TwoFactorDto - The DTO containing the email and 2FA code.
+Returns: A LoginResponseDto containing a JWT token.
+forgotPassword(email: string): Promise<string>
+Description: Initiates the password reset process by sending a reset password link to the user's email.
+Parameters:
+email: string - The user's email.
+Returns: A message indicating that the reset password link has been sent to the user's email.
+resetPassword(token: string, newPassword: string): Promise<string>
+Description: Resets the user's password using the reset password token.
+Parameters:
+token: string - The reset password token.
+newPassword: string - The new password to set.
+Returns: A message indicating that the password has been updated successfully.
+loadUserDetails(userId: string): Promise<User | null>
+Description: Loads user details based on the user ID.
+Parameters:
+userId: string - The ID of the user.
+Returns: A User object if the user is found, otherwise null.
+
+***************************************************************************************************
+LoginFactoryService
+Description
+The LoginFactoryService is responsible for creating instances of LoginRequest and LoginResponse entities.
+
+Methods
+createLoginRequest(createLoginRequest: LoginRequestDto): LoginRequest
+Description: Creates a new LoginRequest entity based on the provided DTO.
+Parameters:
+createLoginRequest: LoginRequestDto - The DTO containing the login request data.
+Returns: A new LoginRequest entity.
+createLoginResponse(accessToken: string): LoginResponseDto
+Description: Creates a new LoginResponseDto containing the access token.
+Parameters:
+accessToken: string - The JWT access token.
+Returns: A new LoginResponseDto containing the access token.
+
+*****************************************************************************************************
+
+Here is the documentation for the LoginUseCasesModule:
+
+LoginUseCasesModule
+Description
+The LoginUseCasesModule is a module that provides the functionality related to user login, including creating and validating login requests, handling two-factor authentication, and resetting passwords.
+
+Dependencies
+DataServicesModule: Module for accessing data services.
+BcryptModule: Module for bcrypt hashing services.
+JwtServicesModule: Module for JWT token services.
+Providers
+LoginFactoryService: Service for creating login request and response entities.
+LoginUseCase: Service for handling user login operations.
+JwtService: Service for JWT token generation and verification.
+MailerService: Service for sending emails.
+Exports
+LoginFactoryService: Service for creating login request and response entities.
+LoginUseCase: Service for handling user login operations.

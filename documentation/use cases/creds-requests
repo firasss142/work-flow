@@ -1,0 +1,75 @@
+CredsRequestsUseCases
+Description
+The CredsRequestsUseCases class provides methods for managing credentials requests, including creating, updating, and retrieving requests. It also provides methods for getting statistics on requests.
+
+Dependencies
+IDataServices: Service for accessing data services.
+CredsRequestFactoryService: Service for creating and updating credentials request entities.
+NotificationsUseCases: Service for managing notifications related to credentials requests.
+NotificationsFactoryService: Service for creating notification entities.
+UserUseCases: Service for managing user-related operations.
+Methods
+getAllBasedOnRole(userId: string): Promise<CredsRequest[]>
+Returns all credentials requests based on the user's role. If the user is an admin, it returns all pending requests. If the user is not an admin, it returns all personal pending requests.
+
+getAllPersonalRequests(userId: string): Promise<CredsRequest[]>
+Returns all personal pending credentials requests for a given user.
+
+getAllRequests(): Promise<CredsRequest[]>
+Returns all pending credentials requests.
+
+getRequestById(id: any): Promise<CredsRequest>
+Returns a credentials request by its ID.
+
+createCredsRequest(createCredsRequestDto: CreateCredsRequestDto): Promise<CredsRequest>
+Creates a new credentials request based on the provided data.
+
+updateCredsRequest(requestId: string, updateCredsRequestDto: UpdateCredsRequestDto, attesterId: string): Promise<CredsRequest>
+Updates a credentials request based on the provided data. If the request is approved or completed, it updates the user's attestation and subRole.
+
+findCredsRequestByArtId(artId: string): Promise<CredsRequest>
+Finds a credentials request by the associated art ID.
+
+findCredsRequestByArtistId(artistId: string): Promise<CredsRequest[]>
+Finds all credentials requests associated with a specific artist ID.
+
+deleteCredsRequest(id: string): Promise<boolean>
+Deletes a credentials request by its ID.
+
+credsRequestStats(): Promise<CredsRequestStats>
+Returns statistics on all credentials requests, including counts for pending, rejected, approved, and completed requests.
+
+ownCredsRequestStats(currentUserId: any): Promise<CredsRequestStats>
+Returns statistics on credentials requests for the current user, including counts for pending, rejected, approved, and completed requests.
+
+*****************************************************************************************************
+CredsRequestFactoryService
+Description
+The CredsRequestFactoryService class provides methods for creating and updating credentials request entities.
+
+Methods
+createCredsRequest(createCredsRequest: CreateCredsRequestDto): CredsRequest
+Creates a new credentials request based on the provided data.
+
+updateCredsRequest(updateCredsRequest: UpdateCredsRequestDto): CredsRequest
+Updates a credentials request based on the provided data.
+
+*************************************************************************************************************
+CredsRequestsUseCasesModule
+Description
+The CredsRequestsUseCasesModule is a module that provides the necessary dependencies for managing credentials requests.
+
+Dependencies
+DataServicesModule: Module for data services.
+SocketModule: Module for socket services.
+UserUseCasesModule: Module for user use cases.
+Providers
+CredsRequestFactoryService: Service for creating credentials request entities.
+CredsRequestsUseCases: Use case service for managing credentials requests.
+NotificationsUseCases: Use case service for managing notifications.
+NotificationsFactoryService: Service for creating notification entities.
+Exports
+CredsRequestFactoryService: Service for creating credentials request entities.
+CredsRequestsUseCases: Use case service for managing credentials requests.
+NotificationsUseCases: Use case service for managing notifications.
+NotificationsFactoryService: Service for creating notification entities.

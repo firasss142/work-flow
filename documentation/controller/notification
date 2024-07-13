@@ -1,0 +1,26 @@
+NotificationsController
+Description
+The NotificationsController is a controller that handles HTTP requests related to notifications.
+
+Constructor
+constructor(notificationsUseCases: NotificationsUseCases): Initializes the NotificationsController with an instance of the NotificationsUseCases.
+Endpoints
+GET /api/notifications/unseen: Retrieves unseen notifications. (Requires Admin role)
+GET /api/notifications: Retrieves all notifications. (Requires Admin role)
+GET /api/notifications/:id: Retrieves a notification by ID. (Requires Admin role)
+GET /api/notifications/artist/:id: Retrieves notifications for an artist by ID. (Requires Admin role)
+GET /api/notifications/request/:id: Retrieves notifications for a request by ID. (Requires Admin role)
+POST /api/notifications: Creates a new notification. (Requires Admin role)
+PUT /api/notifications/:id: Updates a notification by ID. (Requires Admin role)
+DELETE /api/notifications/:id: Deletes a notification by ID. (Requires Admin role)
+Guards
+JwtAuthGuard: Protects routes with JWT authentication.
+RolesGuard: Protects routes based on user roles.
+Swagger Decorators
+@ApiTags("api/notifications"): Tags the controller with "api/notifications" for Swagger documentation.
+@ApiBearerAuth(): Indicates that routes require a bearer token for authentication.
+@ApiParam({ name: "id", type: String, description: "ID of the notification" }): Adds a parameter description for Swagger documentation.
+@ApiBody({ type: CreateNotificationDto }): Specifies the body type for the createNotification endpoint.
+@ApiBody({ type: UpdateNotificationDto }): Specifies the body type for the updateNotification endpoint.
+Usage
+This controller can be used to manage notifications, including creating, updating, and deleting notifications.

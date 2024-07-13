@@ -1,0 +1,26 @@
+MessageController
+Description
+The MessageController is a controller that handles HTTP requests related to messaging.
+
+Constructor
+constructor(messagesUseCases: MessagesUseCases): Initializes the MessageController with an instance of the MessagesUseCases.
+Endpoints
+POST /api/messages: Creates a new message. (Requires authentication)
+GET /api/messages/allMessages: Retrieves all messages. (Requires Admin role)
+GET /api/messages/:id: Retrieves a message by ID. (Requires authentication)
+PUT /api/messages/:id: Updates a message by ID. (Requires authentication)
+DELETE /api/messages/:id: Deletes a message by ID. (Requires authentication)
+GET /api/messages/receiverId/:id: Retrieves messages by receiver ID. (Requires authentication)
+GET /api/messages/senderId/:id: Retrieves messages by sender ID. (Requires authentication)
+PUT /api/messages/read/:id: Marks a message as read by ID. (Requires authentication)
+GET /api/messages/conversation/:conversationId: Retrieves messages by conversation ID. (Requires authentication)
+Guards
+JwtAuthGuard: Protects routes with JWT authentication.
+RolesGuard: Protects routes based on user roles.
+Swagger Decorators
+@ApiTags("api/messages"): Tags the controller with "api/messages" for Swagger documentation.
+@ApiBearerAuth(): Indicates that routes require a bearer token for authentication.
+@ApiBody({ type: CreateMessagesDto }): Specifies the request body for creating a message.
+@ApiParam({ name: "id", type: String, description: "ID of the message" }): Adds a parameter description for Swagger documentation.
+Usage
+This controller can be used to manage messages, including creating, updating, deleting, and retrieving messages.

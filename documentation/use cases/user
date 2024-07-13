@@ -1,0 +1,104 @@
+
+UserUseCases
+Description
+This class defines the use cases related to user management. It implements OnModuleInit to initialize specific users at module startup.
+
+Methods
+onModuleInit(): Promise<void>
+Description: Initializes an admin user if none exists already.
+Returns: Promise<void>
+getAllUsers(): Promise<User[]>
+Description: Retrieves all users.
+Returns: Promise<User[]> - An array of User objects.
+getUserById(id: any): Promise<User>
+Description: Retrieves a user by their ID.
+Parameters:
+id: any - The user's ID.
+Returns: Promise<User> - The found user.
+createUser(createUserDto: CreateUserDto): Promise<User>
+Description: Creates a new user.
+Parameters:
+createUserDto: CreateUserDto - The data of the new user.
+Returns: Promise<User> - The created user.
+createAccount(createUserDto: CreateUserDto, file: Express.Multer.File): Promise<User>
+Description: Creates a user account with additional details such as a citizen role and an avatar.
+Parameters:
+createUserDto: CreateUserDto - The data of the new user.
+file: Express.Multer.File - The user's avatar file.
+Returns: Promise<User> - The created user.
+appendAttestationToUser(userId: string, attestationType: EasAttestationTypes, userType: EasAttestationUserType, attesterId: string): Promise<User>
+Description: Adds an attestation to an existing user.
+Parameters:
+userId: string - The user's ID.
+attestationType: EasAttestationTypes - The attestation type.
+userType: EasAttestationUserType - The attested user type.
+attesterId: string - The attester's ID.
+Returns: Promise<User> - The user updated with the attestation.
+updateUser(userId: string, updateUserDto: UpdateUserDto, file: Express.Multer.File): Promise<User>
+Description: Updates a user's information.
+Parameters:
+userId: string - The ID of the user to update.
+updateUserDto: UpdateUserDto - The new user data.
+file: Express.Multer.File - The user's avatar file.
+Returns: Promise<User> - The updated user.
+updateUserPassword(userId: string, updateUserPasswordDto: UpdateUserPasswordDto): Promise<boolean>
+Description: Updates a user's password.
+Parameters:
+userId: string - The user's ID.
+updateUserPasswordDto: UpdateUserPasswordDto - The password update data.
+Returns: Promise<boolean> - true if the update is successful, otherwise false.
+findUserByEmail(email: string): Promise<User>
+Description: Finds a user by their email address.
+Parameters:
+email: string - The user's email address to find.
+Returns: Promise<User> - The found user.
+deleteUser(id: string): Promise<boolean>
+Description: Deletes a user.
+Parameters:
+id: string - The ID of the user to delete.
+Returns: Promise<boolean> - true if the deletion is successful, otherwise false.
+usersStats(): Promise<number>
+Description: Retrieves user statistics, including the number of users with the citizen role.
+Returns: Promise<number> - The number of users with the citizen role.
+revokeUserAttestation(uid: string): Promise<boolean>
+Description: Revokes a user's attestation.
+Parameters:
+uid: string - The attestation ID to revoke.
+Returns: Promise<boolean> - true if the revocation is successful, otherwise false.
+
+***************************************************************************************
+
+UserFactoryService
+Description
+The UserFactoryService class provides methods for creating and updating user entities (User instances) based on data transfer objects (DTOs) received from the client.
+
+Methods
+createNewUser(createUserDto: CreateUserDto): User
+Description: Creates a new User entity based on the data provided in the CreateUserDto.
+Parameters:
+createUserDto: CreateUserDto - The DTO containing the data for the new user.
+Returns: User - The newly created user entity.
+updateUser(updateUserDto: UpdateUserDto): User
+Description: Updates an existing User entity based on the data provided in the UpdateUserDto.
+Parameters:
+updateUserDto: UpdateUserDto - The DTO containing the updated data for the user.
+Returns: User - The updated user entity.
+
+*************************************************************************
+UserUseCasesModule
+Description
+The UserUseCasesModule is a module in the NestJS application that defines and exports providers related to user management, such as UserFactoryService and UserUseCases. It also imports other modules required for user management, such as DataServicesModule, BcryptModule, EASModule, CredsIssuedUseCasesModule, and CircleModule.
+
+Imports
+DataServicesModule - Module providing data services for interacting with the database.
+BcryptModule - Module providing bcrypt services for password hashing.
+EASModule - Module providing services for External Attestation System (EAS) integration.
+CredsIssuedUseCasesModule - Module providing use cases for managing credentials issuance.
+CircleModule - Module providing services for Circle integration.
+Providers
+UserFactoryService - Service for creating and updating user entities.
+UserUseCases - Class defining use cases related to user management.
+Exports
+UserFactoryService - Exported for use in other modules.
+UserUseCases - Exported for use in other modules.
+

@@ -1,0 +1,48 @@
+NotificationsUseCases
+Description
+The NotificationsUseCases class defines the use cases related to notifications. It provides methods for managing notifications, such as creating, updating, and deleting notifications.
+
+Constructor
+dataServices: An instance of the IDataServices interface for accessing data services.
+notificationsFactoryService: An instance of the NotificationsFactoryService for creating notification entities.
+notificationSocket: An instance of the AbstractWebSocketGateway for sending notifications over WebSocket.
+Methods
+getAllNotifications(): Promise<Notification[]>: Retrieves all notifications.
+getUnseenNotifications(): Promise<Notification[]>: Retrieves all unseen notifications.
+getNotificationById(id: any): Promise<Notification>: Retrieves a notification by its ID.
+createNotification(createNotificationDto: CreateNotificationDto): Promise<Notification>: Creates a new notification.
+updateNotif(notifId: string, updateNotificationDto: UpdateNotificationDto): Promise<Notification>: Updates a notification.
+findNotificationByArtistId(artistId: string): Promise<Notification[]>: Finds notifications by artist ID.
+findNotificationByRequestId(reqId: string): Promise<Notification[]>: Finds notifications by request ID.
+deleteNotification(id: string): Promise<boolean>: Deletes a notification.
+Exceptions
+NotFoundException: Thrown when a notification is not found.
+
+*************************************************************************************************************
+NotificationsFactoryService
+Description
+The NotificationsFactoryService class provides methods for creating and updating notification entities.
+
+Methods
+createNewNotification(createNotification: CreateNotificationDto): Notification: Creates a new notification entity based on the provided CreateNotificationDto.
+updateNotification(updateNotification: UpdateNotificationDto): Notification: Updates a notification entity based on the provided UpdateNotificationDto.
+
+**************************************************************************************************************
+
+Here is the documentation for the NotificationsUseCasesModule:
+
+NotificationsUseCasesModule
+Description
+The NotificationsUseCasesModule is a module responsible for providing and managing notifications-related services and components.
+
+Imports
+DataServicesModule: Module for data services.
+SocketModule: Module for socket services.
+Providers
+NotificationsFactoryService: Service for creating notification entities.
+NotificationsUseCases: Use cases for handling notifications.
+NotificationsGateway: Gateway for managing notifications over sockets.
+Exports
+NotificationsFactoryService: Service for creating notification entities.
+NotificationsUseCases: Use cases for handling notifications.
+NotificationsGateway: Gateway for managing notifications over sockets.

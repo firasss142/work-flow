@@ -1,0 +1,43 @@
+NotificationsGateway
+Description
+The NotificationsGateway is a WebSocket gateway that handles WebSocket connections for sending real-time notifications to clients.
+
+Constructor
+constructor(jwtService: JwtService, mongoDataService: IDataServices): Initializes the NotificationsGateway with the JWT service and MongoDB data services.
+Properties
+private connectedClients: Map<string, { userId: string; role: string }>: A map that stores information about connected clients, including their user ID and role.
+Methods
+async handleConnection(client: Socket, ...args: any[]): Promise<void>: Handles a new WebSocket connection. Verifies the user's JWT token, adds the user to the connectedClients map, and logs the connection.
+handleDisconnect(client: Socket): void: Handles a WebSocket disconnect event. Removes the disconnected client from the connectedClients map and logs the disconnection.
+notifyAdminsOfNewRequest(request: any): void: Notifies all connected admins of a new request by emitting a "newCredsRequest" event to the admin clients.
+notifyNewMessage(message: any): void: Notifies clients involved in a message (sender and receiver) of a new message by emitting a "newMessage" event to the respective clients.
+Usage
+This gateway can be used in conjunction with a WebSocket client to establish real-time communication between the server and clients.
+
+***********************************************************************************************************************
+
+AbstractWebSocketGateway Abstract Class
+This abstract class defines the contract for a WebSocket gateway in a NestJS application, providing methods for handling connection and disconnection events, as well as methods for notifying about new requests and messages.
+
+Properties
+server: Server
+Type: Server (from "socket.io")
+Description: The WebSocket server instance.
+Methods
+handleConnection(client: any, ...args: any[]): void
+Description: Handles a new client connection.
+Parameters:
+client (any): The client object representing the connection.
+args (...any[]): Additional arguments passed to the handler.
+handleDisconnect(client: any): void
+Description: Handles a client disconnection.
+Parameters:
+client (any): The client object representing the disconnection.
+notifyAdminsOfNewRequest(request: any): void
+Description: Notifies admins of a new request.
+Parameters:
+request (any): The request object to notify admins about.
+notifyNewMessage(message: any): void
+Description: Notifies about a new message.
+Parameters:
+message (any): The new message object to notify about.

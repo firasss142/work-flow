@@ -1,0 +1,60 @@
+ConversationUseCases
+Description
+The ConversationUseCases class provides methods for handling conversation-related use cases.
+
+Constructor
+dataServices: An instance of IDataServices for accessing data services.
+Methods
+getConversationById(conversationId: string): Promise<Conversation | null>
+Retrieves a conversation by its ID.
+Parameters:
+conversationId: The ID of the conversation to retrieve.
+Returns: A Promise that resolves to a Conversation object if found, or null if not found.
+getAllConversations(page: number, limit: number): Promise<any[]>
+Retrieves all conversations, paginated.
+Parameters:
+page: The page number.
+limit: The number of items per page.
+Returns: A Promise that resolves to an array of conversation objects.
+getConversationsForCurrentUser(userId: string, page: number, limit: number): Promise<any[]>
+Retrieves conversations for the current user, paginated.
+Parameters:
+userId: The ID of the current user.
+page: The page number.
+limit: The number of items per page.
+Returns: A Promise that resolves to an array of conversation objects.
+Usage
+This class can be used to retrieve conversations, either all conversations or conversations specific to the current user, in a paginated manner.
+
+**************************************************************************************************************
+ConversationFactoryService
+Description
+The ConversationFactoryService class provides methods for creating and updating conversation objects.
+
+Methods
+createNewConversation(createConversationDto: CreateConversationDto): Conversation
+Creates a new conversation object based on the provided DTO.
+Parameters:
+createConversationDto: The DTO containing data for creating a new conversation.
+Returns: A new Conversation object.
+updateConversation(updateConversationDto: UpdateConversationDTO): Conversation
+Updates an existing conversation object based on the provided DTO.
+Parameters:
+updateConversationDto: The DTO containing data for updating a conversation.
+Returns: An updated Conversation object.
+Usage
+This class can be used to create new conversation objects based on DTOs and update existing conversation objects with new data.
+
+*****************************************************************************************************
+ConversationUseCasesModule
+Description
+The ConversationUseCasesModule is a NestJS module that provides conversation use cases for managing conversations.
+
+Imports
+DataServicesModule: Imported to access data services for managing conversations.
+Providers
+ConversationUseCases: Provided to enable the use of conversation use cases in other modules.
+Exports
+ConversationUseCases: Exported to make conversation use cases available for use in other modules.
+Usage
+This module should be imported in the root module of your NestJS application to make conversation use cases available throughout the application.

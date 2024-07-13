@@ -1,0 +1,101 @@
+EASService
+Description
+The EASService is a service that provides methods for interacting with the Ethereum Attestation Service (EAS) contract, including creating on-chain and off-chain attestations.
+
+Constructor
+constructor(): Initializes the EASService with the EAS contract address, provider URL, and signer.
+Properties
+private readonly easContractAddress: string: The address of the EAS contract.
+private readonly provider: string: The URL of the Ethereum provider.
+private readonly signer: string: The signer used for transactions.
+Methods
+async createAttestation(type: EasAttestationTypes, user: User, EasAttestationUserType: EasAttestationUserType): Promise<any>: Creates an attestation either on-chain or off-chain based on the specified type. Returns the transaction receipt or the off-chain attestation URL.
+async revokeOffChain(uid: string): Promise<boolean>: Revokes an off-chain attestation with the specified UID. Returns true if the revocation is successful, otherwise false.
+Usage
+This service can be injected into other classes or services in your NestJS application to interact with the EAS contract for attestation-related functionalities.
+
+******************************************************************************************************
+                 *********************************************************************
+
+CircleService
+Description
+The CircleService is a service that interacts with the Circle API to perform various operations related to user management and wallet creation.
+
+Constructor
+constructor(httpService: HttpService): Initializes the CircleService with an instance of the HttpService.
+Properties
+private readonly baseUrl: string: The base URL for the Circle API.
+private readonly apiKey: string: The API key used for authorization with the Circle API.
+private readonly entitySecret: string: The entity secret used for encrypting data.
+private readonly entity: any: An entity object used for interacting with the Circle API.
+Methods
+async createDevelopWallet(userData: Partial<User>): Promise<any>: Creates a new developer wallet for a user with the specified data. Uses encryption to secure the entity secret.
+getEntity(): Observable<any>: Retrieves the entity object from the Circle API.
+generateEntitySecretCiphertext(publicKeyPem: any): string: Generates an encrypted entity secret ciphertext using the provided public key.
+createUser(userData: any): Observable<any>: Creates a new user in the Circle API.
+getUser(userData: any): Observable<any>: Retrieves a user from the Circle API based on the provided user data.
+GetWallet(walletData: any, userToken: string): Observable<any>: Retrieves a wallet from the Circle API based on the provided wallet data and user token.
+createUserToken(userData: any): Observable<any>: Creates a new user token in the Circle API.
+createDevWalletSet(walletSetData: any): Observable<any>: Creates a new developer wallet set in the Circle API.
+createUserWallet(userName: string, userId: string, userToken: string): Observable<any>: Creates a new wallet for a user in the Circle API.
+Usage
+This service can be used to interact with the Circle API for various user and wallet management operations.
+
+******************************************************************************************************
+                 *********************************************************************
+
+ICircleService Interface
+This interface defines the contract for a service that provides various operations related to user management and wallet functionality.
+
+Methods
+createUser(userData: any): any
+Description: Creates a new user.
+Parameters:
+userData (any): Data required to create a user.
+Returns: A result indicating the success or failure of the operation, or information about the created user.
+createUserToken(userData: any): any
+Description: Creates a token for a user.
+Parameters:
+userData (any): Data required to create a user token.
+Returns: A token for the user.
+createUserWallet(userName: string, userId: string, userToken: string): any
+Description: Creates a wallet for a user.
+Parameters:
+userName (string): The name of the user.
+userId (string): The ID of the user.
+userToken (string): The token of the user.
+Returns: A result indicating the success or failure of the operation, or information about the created wallet.
+getUser(userData: any): any
+Description: Retrieves a user based on the provided data.
+Parameters:
+userData (any): Data required to retrieve a user.
+Returns: Information about the user.
+GetWallet(walletData: any, userToken: string): any
+Description: Retrieves a wallet based on the provided data and user token.
+Parameters:
+walletData (any): Data required to retrieve a wallet.
+userToken (string): The token of the user.
+Returns: Information about the wallet.
+createDevelopWallet(userData: any): any
+Description: Creates a development wallet for a user.
+Parameters:
+userData (any): Data required to create a development wallet.
+Returns: A result indicating the success or failure of the operation, or information about the created development wallet.
+******************************************************************************************************
+                 *********************************************************************
+IEASService Interface
+This interface defines the contract for a service that provides operations related to EAS (External Attestation Service) attestations.
+
+Methods
+createAttestation(type: EasAttestationTypes, user: User, userId: string): Promise<any>
+Description: Creates an attestation of the specified type for a user.
+Parameters:
+type (EasAttestationTypes): The type of attestation to create.
+user (User): The user for whom the attestation is being created.
+userId (string): The ID of the user.
+Returns: A Promise that resolves to the created attestation.
+revokeOffChain(uid: string): Promise<boolean>
+Description: Revokes an off-chain attestation with the specified UID.
+Parameters:
+uid (string): The UID of the off-chain attestation to revoke.
+Returns: A Promise that resolves to true if the revocation is successful, false otherwise.

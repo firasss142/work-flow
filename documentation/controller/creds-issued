@@ -1,0 +1,21 @@
+CredsIssuedController
+Description
+The CredsIssuedController is a controller that handles requests related to issued credentials.
+
+Constructor
+constructor(credsIssuedUseCases: CredsIssuedUseCases): Initializes the CredsIssuedController with an instance of the CredsIssuedUseCases.
+Endpoints
+GET /api/creds-issued: Retrieves all issued credentials for the current user. (Requires authentication)
+GET /api/creds-issued/countCreds/countByTime: Retrieves the count of issued credentials based on time for the current user. (Requires authentication)
+GET /api/creds-issued/countCreds/countByRole: Retrieves the count of issued credentials based on role for the current user. (Requires authentication)
+GET /api/creds-issued/:id: Retrieves issued credentials by ID. (Requires authentication and admin role)
+GET /api/creds-issued/creds/:userId: Retrieves issued credentials by user ID. (Requires authentication)
+Guards
+JwtAuthGuard: Protects routes with JWT authentication.
+RolesGuard: Protects routes based on user roles.
+Swagger Decorators
+@ApiTags("api/creds-issued"): Tags the controller with "api/creds-issued" for Swagger documentation.
+@ApiBearerAuth(): Indicates that routes require a bearer token for authentication.
+@ApiParam({ name: "param", type: String, description: "Description" }): Adds a parameter description for Swagger documentation.
+Usage
+This controller provides endpoints for managing issued credentials, including retrieving all credentials, counts of credentials based on time and role, and retrieving credentials by ID or user ID.

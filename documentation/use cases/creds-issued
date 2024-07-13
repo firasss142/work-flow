@@ -1,0 +1,50 @@
+CredsIssuedUseCases
+Description
+The CredsIssuedUseCases is a service for managing issued credentials.
+
+Dependencies
+IDataServices: Service for data services.
+CredsIssuedFactoryService: Service for creating issued credentials entities.
+Methods
+getAllCredsIssued(userId: string): Get all issued credentials based on user role.
+getAllIssuedCreds(): Get all issued credentials.
+getAllIssuedCredsPersonal(userId: string): Get all issued credentials for a specific user.
+getCredsIssuedBasedOnTime(userId: string): Get issued credentials based on time for a user or admin.
+getAllIssuedCredsCountByTime(): Get count of issued credentials based on time.
+getAllIssuedCredsCountByTimePersonal(userId: string): Get count of issued credentials based on time for a specific user.
+getIssuedCredsById(id: any): Get issued credentials by ID.
+createCredsIssued(createCredsIssuedDto: CreateCredsIssuedDto): Create new issued credentials.
+getCredsIssuedBasedOnRole(userId: string): Get issued credentials based on user role.
+findCredsIssuedByRole(): Find issued credentials by role.
+findCredsIssuedByRolePersonal(userId: string): Find issued credentials by role for a specific user.
+updateCredsIssued(credsId: string): Update issued credentials to mark them as revoked.
+findCredsIssuedByUserId(userId: string): Find issued credentials by user ID.
+Usage
+This service provides methods to manage issued credentials, including retrieving, creating, and updating them based on user roles and time.
+
+*******************************************************************************************************************
+CredsIssuedFactoryService
+Description
+The CredsIssuedFactoryService is a service for creating instances of the CredsIssued entity.
+
+Methods
+createCredsRequest(createCredsIssued: CreateCredsIssuedDto): Create a new instance of the CredsIssued entity based on the provided CreateCredsIssuedDto.
+Usage
+This service is used to create instances of the CredsIssued entity with the specified properties.
+
+*******************************************************************************************************************
+CredsIssuedUseCasesModule
+Description
+The CredsIssuedUseCasesModule is a module that provides the CredsIssuedFactoryService and CredsIssuedUseCases services.
+
+Imports
+DataServicesModule: Module for data services.
+SocketModule: Module for socket services.
+Providers
+CredsIssuedFactoryService: Service for creating instances of the CredsIssued entity.
+CredsIssuedUseCases: Service for handling use cases related to CredsIssued entities.
+Exports
+CredsIssuedFactoryService: Service for creating instances of the CredsIssued entity.
+CredsIssuedUseCases: Service for handling use cases related to CredsIssued entities.
+Usage
+This module can be imported into other modules to access the CredsIssuedFactoryService and CredsIssuedUseCases services for working with CredsIssued entities.

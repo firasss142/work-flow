@@ -1,0 +1,21 @@
+LoginController
+Description
+The LoginController is a controller that handles authentication-related HTTP requests.
+
+Constructor
+constructor(loginUseCase: LoginUseCase): Initializes the LoginController with an instance of the LoginUseCase.
+Endpoints
+POST /auth/login: Logs in a user with provided credentials.
+POST /auth/two-factor-auth: Verifies a two-factor authentication code.
+POST /auth/forgot-password: Sends a password reset link to the user's email.
+POST /auth/reset-password: Resets a user's password using a token.
+GET /auth/loadMe: Loads user details based on the current user's token. (Requires authentication)
+Guards
+JwtAuthGuard: Protects routes with JWT authentication.
+Swagger Decorators
+@ApiTags("auth"): Tags the controller with "auth" for Swagger documentation.
+@ApiBearerAuth(): Indicates that routes require a bearer token for authentication.
+@ApiBody({ type: SomeDto }): Specifies the request body for a particular endpoint.
+@ApiParam({ name: "param", type: String, description: "Description" }): Adds a parameter description for Swagger documentation.
+Usage
+This controller provides endpoints for logging in, verifying two-factor authentication, resetting passwords, and loading user details.

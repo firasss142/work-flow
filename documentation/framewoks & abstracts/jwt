@@ -1,0 +1,37 @@
+JwtService
+Description
+The JwtService is a service that provides methods for generating and verifying JSON Web Tokens (JWTs) using the jsonwebtoken library.
+
+Constructor
+constructor(): Initializes the JwtService.
+Properties
+private readonly secretKey: string: The secret key used for signing and verifying JWTs.
+Methods
+generateToken(data: Record<string, any>, expiresIn: string): string: Generates a JWT with the provided data and expiration time.
+verifyToken(token: string): Record<string, any>: Verifies a JWT and returns the decoded payload.
+verifyResetToken(token: string): string | null: Verifies a reset token and returns the user ID if valid, otherwise returns null.
+Usage
+This service can be injected into other classes or services in your NestJS application to generate and verify JWTs for authentication and authorization purposes.
+
+***********************************************************************************
+
+AbstractJwtService Abstract Class
+This abstract class defines the contract for a service that provides JWT (JSON Web Token) generation and verification functionality.
+
+Methods
+generateToken(data: Record<string, any>, expiresIn: string): string
+Description: Generates a JWT using the provided data and expiration time.
+Parameters:
+data (Record<string, any>): The data to be included in the JWT payload.
+expiresIn (string): The expiration time for the JWT (e.g., '1h' for 1 hour).
+Returns: A string representing the generated JWT.
+verifyToken(token: string): Record<string, any>
+Description: Verifies the validity of a JWT and returns the decoded payload.
+Parameters:
+token (string): The JWT to be verified.
+Returns: A Record<string, any> containing the decoded payload if the token is valid, or throws an error if the token is invalid.
+verifyResetToken(token: string): string
+Description: Verifies the validity of a JWT reset token and returns the associated user ID.
+Parameters:
+token (string): The JWT reset token to be verified.
+Returns: A string representing the user ID associated with the reset token if the token is valid, or throws an error if the token is invalid.
